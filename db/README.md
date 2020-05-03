@@ -37,3 +37,60 @@ services:
     ports:
       - 1521:1521
 ```
+
+## docker-compose 실행
+```sh
+$ docker-compose up -d
+```
+
+<hr>
+<br>
+
+## User 생성
+```sh
+$ docker exec -it oracle11g sqlplus
+Enter user-name: system
+Enter password: system
+SQL> CREATE TABLESPACE DEV_SPACE DATAFILE 'sis.dat' SIZE 500M AUTOEXTEND ON NEXT 10M;
+SQL> DEFINE NEW_USER = 'sis_user01';
+SQL> CREATE USER &NEW_USER. IDENTIFIED BY "1234";
+SQL> GRANT CONNECT, RESOURCE, CREATE JOB, CREATE VIEW, CREATE ANY CONTEXT TO &NEW_USER;
+SQL> ALTER USER &NEW_USER QUOTA UNLIMITED ON USERS;
+SQL> ALTER USER &NEW_USER DEFAULT TABLESPACE DEV_SPACE;
+```
+
+<hr>
+<br>
+
+## docker-compose 중지
+```sh
+$ docker-compose stop
+```
+
+<hr>
+<br>
+
+## docker-compose 프로세스 확인
+```sh
+$ docker-compose ps
+
+          Name                 Command        State     Ports
+-------------------------------------------------------------
+firstproject_oracle11g_1   /entrypoint.sh    Exit 137
+```
+
+<hr>
+<br>
+
+## docker-compose 삭제
+```sh
+$ docker-compose rm
+```
+
+<hr>
+<br>
+
+## docker-compose 재시작
+```sh
+$ docker-compose up -d
+```
